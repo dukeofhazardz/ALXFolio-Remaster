@@ -75,7 +75,8 @@ class GithubData:
             except Exception as e:
                 print(e)
             finally:
-                await redis_client.close()
+                if redis_client:
+                    await redis_client.close()
     
     async def get_repos(self):
         """ Retrieves the github repos of a user
@@ -104,4 +105,5 @@ class GithubData:
             except Exception as e:
                 print(e)
             finally:
-                await redis_client.close()
+                if redis_client:
+                    await redis_client.close()

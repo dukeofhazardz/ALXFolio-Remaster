@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import GithubData
 from custom_user.forms import UserEducationForm, UserSocialForm
-import asyncio
+from asgiref.sync import async_to_sync
 
 # Create your views here.
 def home(request):
@@ -16,8 +16,12 @@ def profile(request):
     if user.is_authenticated:
         username = user.github_username
         g = GithubData(username)
-        data = asyncio.run(g.get_user())
-        repos = asyncio.run(g.get_repos())
+
+        get_user_sync = async_to_sync(g.get_user)
+        get_repos_sync = async_to_sync(g.get_repos)
+
+        data = get_user_sync()
+        repos = get_repos_sync()
         return render(request, 'profile.html', {'user': user, 'data': data, 'repos': repos})
     messages.error(request, 'You must be logged in to view your profile.')
     return redirect('login')
