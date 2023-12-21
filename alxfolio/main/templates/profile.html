@@ -1,0 +1,24 @@
+{% include 'base.html' %}
+{% block main %}
+{% if user.is_authenticated %}
+<a class="text-decoration-none" href="{% url 'logout' %}">Logout <i class="fa fa-sign-out"></i></a>
+<a class="text-decoration-none" href="{% url 'education' %}">Update Education </a>
+<a class="text-decoration-none" href="{% url 'social' %}">Update Social</a>
+{% endif %}
+<a class="text-decoration-none" href="{% url 'home' %}">Go Home<i class="fa fa-home"></i></a>
+<h1>Welcome to your personal portfolio</h1>
+{% if data %}
+    {% for k, v in data.items %}
+        <ul>
+            <li>{{ k }}: {{ v }}</li>
+        </ul>
+    {% endfor %}
+{% endif %}
+{% if repos %}
+    {% for repo in repos %}
+        <ul>
+            <li>{{ repo.name }}</li>
+        </ul>
+    {% endfor %}
+{% endif %}
+{% endblock %}
