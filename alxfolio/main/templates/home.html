@@ -1,13 +1,25 @@
 {% include 'base.html' %}
 {% block base %}
 
-    <h1>Welcome to ALXFolio, your personalized portfolio generating site</h1>
-    {% if user.is_authenticated %}
-        {{ user.first_name }}
-        <a class="text-decoration-none" href="{% url 'profile' %}">View Profile<i class="fa fa-home"></i></a>
-        <a class="text-decoration-none" href="{% url 'logout' %}">Logout<i class="fa fa-sign-out"></i></a>
-    {% else %}
-        <a class="text-decoration-none" href="{% url 'signup' %}">Signup<i class="fa fa-sign-up"></i></a>
-        <a class="text-decoration-none" href="{% url 'login' %}">Login<i class="fa fa-sign-in"></i></a>
-    {% endif %}
+  <h1>Welcome to ALXFolio, your personalized portfolio generating site</h1>
+  {% if user.is_authenticated %}
+    {{ user.first_name }}
+    <a class="text-decoration-none" href="{% url 'profile' %}">View Profile<i class="fa fa-home"></i></a>
+    <a class="text-decoration-none" href="{% url 'logout' %}">Logout<i class="fa fa-sign-out"></i></a>
+  {% else %}
+    <a class="text-decoration-none" href="{% url 'signup' %}">Signup<i class="fa fa-sign-up"></i></a>
+    <a class="text-decoration-none" href="{% url 'login' %}">Login<i class="fa fa-sign-in"></i></a>
+  {% endif %}
+
+  {% if users %}
+    {% for a_user in users %}
+      {% if a_user.github_username %}
+        <div class="a_user">
+          <p><img src="https://github.com/{{ a_user.github_username }}.png" class="img img-responsive" width="60px" height="60px"> {{ a_user.github_username }}</p>
+          <a href="{% url 'portfolio' github_username=a_user.github_username %}">{{ a_user.first_name }} {{ a_user.last_name }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
 {% endblock %}

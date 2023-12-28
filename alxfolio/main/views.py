@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import Http404
 from .models import GithubData
 from custom_user.forms import UserEducationForm, UserSocialForm, CustomUser, Education, Social
 from asgiref.sync import async_to_sync
@@ -8,9 +7,10 @@ from asgiref.sync import async_to_sync
 # Create your views here.
 def home(request):
     user = request.user
+    users = CustomUser.objects.all()
     if user.is_authenticated:
-        return render(request, 'home.html', {'user': user})
-    return render(request, 'home.html')
+        return render(request, 'home.html', {'user': user, 'users': users})
+    return render(request, 'home.html', {'users': users})
 
 def profile(request):
     user = request.user
@@ -27,13 +27,15 @@ def profile(request):
         custom_user = CustomUser.objects.get(github_username=username)
         education_id = custom_user.education_id
         social_id = custom_user.social_id
+        education = None
+        socials = None
 
         try:
             education = Education.objects.get(id=education_id)
             socials = Social.objects.get(id=social_id)
-            print(type(socials))
-        except Education.DoesNotExist or Social.DoesNotExist:
+        except Education.DoesNotExist:
             education = None
+        except Social.DoesNotExist:
             socials = None
 
         return render(request, 'profile.html', {'user': user,
@@ -44,35 +46,39 @@ def profile(request):
     messages.error(request, 'You must be logged in to view your profile.')
     return redirect('home')
 
-def portfolio(request, github_username):
-    try:
-        custom_user = get_object_or_404(CustomUser, github_username=github_username)
-        g = GithubData(github_username)
-    
-        get_user_sync = async_to_sync(g.get_user)
-        get_repos_sync = async_to_sync(g.get_repos)
-
-        data = get_user_sync()
-        repos = get_repos_sync()
-
-        education_id = custom_user.education_id
-        social_id = custom_user.social_id
-
+def portfolio(request, github_username=None):
+    if github_username is not None and github_username != '':
         try:
-            education = Education.objects.get(id=education_id)
-            socials = Social.objects.get(id=social_id)
-            print(type(socials))
-        except Education.DoesNotExist or Social.DoesNotExist:
+            custom_user = CustomUser.objects.get(github_username=github_username)
+            g = GithubData(github_username)
+        
+            get_user_sync = async_to_sync(g.get_user)
+            get_repos_sync = async_to_sync(g.get_repos)
+
+            data = get_user_sync()
+            repos = get_repos_sync()
+
+            education_id = custom_user.education_id
+            social_id = custom_user.social_id
             education = None
             socials = None
 
-        return render(request, 'portfolio.html', {'data': data,
-                                                'repos': repos,
-                                                'education': education,
-                                                'socials': socials})
-    
-    except Http404:
-        return render(request, '404.html')
+            try:
+                education = Education.objects.get(id=education_id)
+                socials = Social.objects.get(id=social_id)
+            except Education.DoesNotExist:
+                education = None
+            except Social.DoesNotExist:
+                socials = None
+
+            return render(request, 'portfolio.html', {'data': data,
+                                                      'repos': repos,
+                                                      'education': education,
+                                                      'socials': socials})
+        
+        except CustomUser.DoesNotExist:
+            return render(request, '404.html')
+    return render(request, '404.html')
 
 def education(request):
     user = request.user
