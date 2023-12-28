@@ -1,12 +1,17 @@
 {% include 'base.html' %}
 
-<h1>Signup</h1>
+<div class="shadow p-4 mb-5 bg-body rounded">
+  <h1>Signup</h1>
     <br/><br/>
-{% block content %}
+  {% block content %}
     <form method="POST" class="form-group">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-secondary">Submit</button>
-        </form>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-secondary">Submit</button>
+    </form>
+</div>
+
+<a class="text-decoration-none" href="{% url 'login' %}">Already have an account? <b>Login</b><i class="fa fa-sign-in"></i></a>
+<a class="text-decoration-none" href="{% url 'home' %}">Go Home<i class="fa fa-home"></i></a>
 
 {% endblock %}
