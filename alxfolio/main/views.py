@@ -25,14 +25,13 @@ def profile(request):
         repos = get_repos_sync()
 
         custom_user = CustomUser.objects.get(github_username=username)
-        education_id = custom_user.education_id
-        social_id = custom_user.social_id
+        user_id = custom_user.id
         education = None
         socials = None
 
         try:
-            education = Education.objects.get(id=education_id)
-            socials = Social.objects.get(id=social_id)
+            education = Education.objects.get(user_id=user_id)
+            socials = Social.objects.get(user_id=user_id)
         except Education.DoesNotExist:
             education = None
         except Social.DoesNotExist:
@@ -58,14 +57,13 @@ def portfolio(request, github_username=None):
             data = get_user_sync()
             repos = get_repos_sync()
 
-            education_id = custom_user.education_id
-            social_id = custom_user.social_id
+            user_id = custom_user.id
             education = None
             socials = None
 
             try:
-                education = Education.objects.get(id=education_id)
-                socials = Social.objects.get(id=social_id)
+                education = Education.objects.get(user_id=user_id)
+                socials = Social.objects.get(user_id=user_id)
             except Education.DoesNotExist:
                 education = None
             except Social.DoesNotExist:
@@ -84,13 +82,15 @@ def education(request):
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
-            form = UserEducationForm(request.POST, instance=user.education)
+            form = UserEducationForm(request.POST)
             if form.is_valid():
                 education_instance = form.save(commit=False)
+                education_instance.user = request.user
                 education_instance.save()
+                messages.success(request, 'Education Update Successful')
                 return redirect('education')
         else:
-            form = UserEducationForm(instance=user.education)
+            form = UserEducationForm()
         return render(request, 'education.html', {'form': form})
     messages.error(request, 'You must be logged in to update education.')
     return redirect('login')
@@ -99,13 +99,15 @@ def social(request):
     user = request.user
     if user.is_authenticated:
         if request.method == "POST":
-            form = UserSocialForm(request.POST, instance=user.social)
+            form = UserSocialForm(request.POST)
             if form.is_valid():
                 social_instance = form.save(commit=False)
+                social_instance.user = request.user
                 social_instance.save()
+                messages.success(request, 'Socials Update Successful')
                 return redirect('social')
         else:
-            form = UserSocialForm(instance=user.social)
+            form = UserSocialForm()
         return render(request, 'social.html', {'form': form})
     messages.error(request, 'You must be logged in to update social.')
     return redirect('login')

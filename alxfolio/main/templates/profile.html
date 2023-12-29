@@ -37,11 +37,11 @@
 
     {% if socials %}
       <h6>You can contact me</h6>
-      {% for social in socials %}
         <ul>
-          <li>{{ social }}</li>
+          <li>{{ socials.instagram }}</li>
+          <li>{{ socials.twitter }}</li>
+          <li>{{ socials.linkedin }}</li>
         </ul>
-      {% endfor %}
     {% endif %}
 
     {% if address %}
