@@ -20,10 +20,12 @@ def user_login(request):
 
     return render(request, 'authenticate/login.html', {})
 
+
 def user_logout(request):
     logout(request)
     messages.success(request, ("You have successfully logged out"))
     return redirect('home')
+
 
 def user_signup(request):
     if request.method == "POST":

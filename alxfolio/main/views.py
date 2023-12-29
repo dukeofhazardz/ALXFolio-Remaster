@@ -4,13 +4,14 @@ from .models import GithubData
 from custom_user.forms import UserEducationForm, UserSocialForm, CustomUser, Education, Social
 from asgiref.sync import async_to_sync
 
-# Create your views here.
+
 def home(request):
     user = request.user
     users = CustomUser.objects.all()
     if user.is_authenticated:
         return render(request, 'home.html', {'user': user, 'users': users})
     return render(request, 'home.html', {'users': users})
+
 
 def profile(request):
     user = request.user
@@ -37,13 +38,25 @@ def profile(request):
         except Social.DoesNotExist:
             socials = None
 
+        bio = socials.bio or None
+        whatido = socials.whatido or None
+        title = socials.title or None
+        twitter = socials.twitter or None
+        instagram = socials.instagram or None
+        linkedin = socials.linkedin or None
+        social = [instagram, twitter, linkedin]
+
         return render(request, 'profile.html', {'user': user,
                                                 'data': data,
                                                 'repos': repos,
                                                 'education': education,
-                                                'socials': socials})
+                                                'bio': bio,
+                                                'whatido': whatido,
+                                                'title': title,
+                                                'socials': social})
     messages.error(request, 'You must be logged in to view your profile.')
     return redirect('home')
+
 
 def portfolio(request, github_username=None):
     if github_username is not None and github_username != '':
@@ -69,14 +82,26 @@ def portfolio(request, github_username=None):
             except Social.DoesNotExist:
                 socials = None
 
+            bio = socials.bio or None
+            whatido = socials.whatido or None
+            title = socials.title or None
+            twitter = socials.twitter or None
+            instagram = socials.instagram or None
+            linkedin = socials.linkedin or None
+            social = [instagram, twitter, linkedin]
+
             return render(request, 'portfolio.html', {'data': data,
                                                       'repos': repos,
                                                       'education': education,
-                                                      'socials': socials})
+                                                      'bio': bio,
+                                                      'whatido': whatido,
+                                                      'title': title,
+                                                      'socials': social})
         
         except CustomUser.DoesNotExist:
             return render(request, '404.html')
     return render(request, '404.html')
+
 
 def education(request):
     user = request.user
@@ -94,6 +119,7 @@ def education(request):
         return render(request, 'education.html', {'form': form})
     messages.error(request, 'You must be logged in to update education.')
     return redirect('login')
+
 
 def social(request):
     user = request.user
