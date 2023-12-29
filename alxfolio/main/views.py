@@ -13,11 +13,19 @@ def home(request):
     return render(request, 'home.html', {'users': users})
 
 
-def profile(request):
-    user = request.user
-    if user.is_authenticated:
-        username = user.github_username
-        g = GithubData(username)
+def portfolio(request, github_username):
+    user = None
+    try:
+        current_user = request.user
+        if current_user.is_authenticated:
+            username = current_user.github_username
+            if username == github_username:
+                user = current_user
+    except Exception as err:
+        print(err)
+
+    try:
+        g = GithubData(github_username)
 
         get_user_sync = async_to_sync(g.get_user)
         get_repos_sync = async_to_sync(g.get_repos)
@@ -25,11 +33,10 @@ def profile(request):
         data = get_user_sync()
         repos = get_repos_sync()
 
-        custom_user = CustomUser.objects.get(github_username=username)
+        custom_user = CustomUser.objects.get(github_username=github_username)
         user_id = custom_user.id
         education = None
         socials = None
-
         try:
             education = Education.objects.get(user_id=user_id)
             socials = Social.objects.get(user_id=user_id)
@@ -37,7 +44,6 @@ def profile(request):
             education = None
         except Social.DoesNotExist:
             socials = None
-
         bio = socials.bio or None
         whatido = socials.whatido or None
         title = socials.title or None
@@ -45,8 +51,7 @@ def profile(request):
         instagram = socials.instagram or None
         linkedin = socials.linkedin or None
         social = [instagram, twitter, linkedin]
-
-        return render(request, 'profile.html', {'user': user,
+        return render(request, 'portfolio.html', {'user': user,
                                                 'data': data,
                                                 'repos': repos,
                                                 'education': education,
@@ -54,53 +59,8 @@ def profile(request):
                                                 'whatido': whatido,
                                                 'title': title,
                                                 'socials': social})
-    messages.error(request, 'You must be logged in to view your profile.')
-    return redirect('home')
-
-
-def portfolio(request, github_username=None):
-    if github_username is not None and github_username != '':
-        try:
-            custom_user = CustomUser.objects.get(github_username=github_username)
-            g = GithubData(github_username)
-        
-            get_user_sync = async_to_sync(g.get_user)
-            get_repos_sync = async_to_sync(g.get_repos)
-
-            data = get_user_sync()
-            repos = get_repos_sync()
-
-            user_id = custom_user.id
-            education = None
-            socials = None
-
-            try:
-                education = Education.objects.get(user_id=user_id)
-                socials = Social.objects.get(user_id=user_id)
-            except Education.DoesNotExist:
-                education = None
-            except Social.DoesNotExist:
-                socials = None
-
-            bio = socials.bio or None
-            whatido = socials.whatido or None
-            title = socials.title or None
-            twitter = socials.twitter or None
-            instagram = socials.instagram or None
-            linkedin = socials.linkedin or None
-            social = [instagram, twitter, linkedin]
-
-            return render(request, 'portfolio.html', {'data': data,
-                                                      'repos': repos,
-                                                      'education': education,
-                                                      'bio': bio,
-                                                      'whatido': whatido,
-                                                      'title': title,
-                                                      'socials': social})
-        
-        except CustomUser.DoesNotExist:
+    except CustomUser.DoesNotExist:
             return render(request, '404.html')
-    return render(request, '404.html')
 
 
 def education(request):
