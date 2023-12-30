@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+/* All */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+/* Body */
+body {
+    background-color: rgb(56, 75, 127);
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 120px;
+    background: rgb(36, 57, 117);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+nav a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 35px;
+    transition: 0.3s;
+}
+
+nav a:hover{
+    color: rgb(128, 205, 243);
+}
+
+/*
+    Home Page Buttons
+*/
+
+.home-btn {
+    border: none;
+    color: whitesmoke;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.home-btn:hover {
+    color: orangered;
+}
+
+
+/* Home Image */
+
+.home-img {
+    float: right;
+    width: 30%;
+    margin-right: 40px;
+    margin-top: 50px;
+}
+
+
+/* Header Elements */
+
+h1 {
+    color: #fff;
+    font-style: initial;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+h3 {
+    color: #fff;
+    font-style: normal;
+    font-size: 50px;
+    font-weight: 730;
+    margin-top: 100px;
+    margin-left: 15px;
+}
+
+p {
+    color: #fff;
+    font-style: inherit;
+    margin-top: 70px;
+}
+
+p.heading {
+    margin-left: 30px;
+    font-size: large;
+}

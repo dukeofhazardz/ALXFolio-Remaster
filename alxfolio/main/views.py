@@ -13,6 +13,13 @@ def home(request):
     return render(request, 'home.html', {'users': users})
 
 
+def about(request):
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'about.html', {'user': user})
+    return render(request, 'about.html', {})
+
+
 def portfolio(request, github_username):
     user = None
     try:

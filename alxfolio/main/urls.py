@@ -8,4 +8,5 @@ urlpatterns = [
     path('<str:github_username>/', views.portfolio, name='portfolio'),
     path('education', views.education, name='education'),
     path('social', views.social, name='social'),
+    path('about', views.about, name='about'),
 ]

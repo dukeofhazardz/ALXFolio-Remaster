@@ -1,24 +1,21 @@
 {% include 'base.html' %}
 {% block content %}
 
-<div class="shadow p-4 mb-5 bg-body rounded">
-  <h1>Login</h1>
-  <br/><br/>
-    <form action="" method="post">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="text" class="form-control" name="email" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" name="password">
-      </div>
-      <input type="submit" value="Submit"
-      class="btn btn-secondary">
-    </form>
-</div>
+<h1>Login</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="text" class="form-control" name="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password">
+  </div>
+  <input type="submit" value="Submit"
+    class="btn btn-secondary">
+</form>
 
 <a class="text-decoration-none" href="{% url 'home' %}">Go Home<i class="fa fa-home"></i></a>
 <a class="text-decoration-none" href="{% url 'signup' %}">Don't have an account? <b>Signup</b><i class="fa fa-sign-up"></i></a>
