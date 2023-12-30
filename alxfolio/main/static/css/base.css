@@ -176,9 +176,13 @@ p.user-ls {
     background-color: rgb(4, 54, 97);
 }
 
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .what-i-do,
 .education,
-.contact-info,
 .address,
 .about-me {
     display: flex;
