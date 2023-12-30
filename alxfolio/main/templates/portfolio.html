@@ -1,76 +1,91 @@
 {% include 'base.html' %}
-{% block main %}
+{% block base %}
 {% if data %}
 
-<h3 class="p-name">{{ data.name }}</h3>
+<div class="user-port">
+  <section class="profile-info">
+    <img src="https://github.com/{{ data.login }}.png" class="img-port">
+    <h3 class="p-name">{{ data.name }}</h3>
 
-<div>
-    <p><img src="https://github.com/{{ data.login }}.png" class="img img-responsive" width="60px" height="60px"> {{ user.name }}</p>
-    <p>{{ user.bio }}</p>
-
-    {% if bio %}
-      <h6>About me</h6>
-      {% if user_title %}
-        <p>{{ user_title }}</p>
+    <section class="contact-info">
+      {% if twitter %}
+        <a href="{{ twitter }}" target="_blank">Twitter</a>
       {% endif %}
-      <p>{{ bio }}</p>
-    {% endif %}
-
-    {% if whatido %}
-      <h6>What I do</h6>
-      <p>{{ whatido }}</p>
-    {% endif %}
-
-    {% if education %}
-      <h6>Education</h6>
-      <p>{{ education.school }}</p>
-      <p>{{ education.year }}</p>
-      <p>{{ education.degree }}</p><br>
-    {% endif %}
-
-    {% if socials %}
-      <h6>You can contact me</h6>
-      {% for social in socials %}
-        <ul>
-          <li>{{ social }}</li>
-        </ul>
-      {% endfor %}
-    {% endif %}
+      {% if linkedin %}
+        <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
+      {% endif %}
+      {% if instagram %}
+        <a href="{{ instagram }}" target="_blank">Instagram</a>
+      {% endif %}
+    </section>
 
     {% if address %}
-      <h6>Address</h6>
-      <p>{{ address }}</p>
+      <section class="address">
+        <h6>Address</h6>
+          <p>{{ address }}</p>
+      </section>
     {% endif %}
-  </div>
 
-  <h3 class="mt-4 text-info">Activity Stats</h3>
-  <p>
-    <img src="https://github-readme-stats.vercel.app/api?username={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false&include_all_commits=true&count_private=true" /><br/>
-    <img src="https://github-readme-streak-stats.herokuapp.com/?user={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false" />
-  </p>
+      {% if bio %}
+          <section class="about-me">
+              <h6>About me</h6>
+              {% if user_title %}
+                  <p>{{ user_title }}</p>
+              {% endif %}
+              <p>{{ bio }}</p>
+          </section>
+      {% endif %}
 
-  <h3 class="mt-4 text-info"> Projects </h3>
-  {% if repos %}
-    {% for repo in repos %}
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{ repo.name }}" aria-expanded="true" aria-controls="{{ repo.name }}">
-              <a class="text-decoration-none" href="{{ repo.url }}">{{ repo.name }} <i class="fa fa-external-link"></i></a>
-            </button>
-          </h2>
-          {% if repo.description %}
-            <div id="{{ repo.name }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                {{ repo.description }}
+      {% if whatido %}
+          <section class="what-i-do">
+              <h6>What I do</h6>
+              <p>{{ whatido }}</p>
+          </section>
+      {% endif %}
+
+      {% if education %}
+          <section class="education">
+              <h6>Education</h6>
+              <p>{{ education.school }}</p>
+              <p>{{ education.year }}</p>
+              <p>{{ education.degree }}</p><br>
+          </section>
+      {% endif %}
+  </section>
+
+  <section class="activity-stats">
+      <h3 class="mt-4 text-info">Activity Stats</h3>
+      <p>
+          <img src="https://github-readme-stats.vercel.app/api?username={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false&include_all_commits=true&count_private=true" /><br/>
+          <img src="https://github-readme-streak-stats.herokuapp.com/?user={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false" />
+      </p>
+  </section>
+
+  <section class="projects">
+      <h3 class="mt-4 text-info"> Projects </h3>
+      {% if repos %}
+          {% for repo in repos %}
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{ repo.name }}" aria-expanded="true" aria-controls="{{ repo.name }}">
+                              <a class="text-decoration-none" href="{{ repo.url }}">{{ repo.name }} <i class="fa fa-external-link"></i></a>
+                          </button>
+                      </h2>
+                      {% if repo.description %}
+                          <div id="{{ repo.name }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  {{ repo.description }}
+                              </div>
+                          </div>
+                      {% endif %}
+                  </div>
               </div>
-            </div>
-          {% endif %}
-        </div>
-      </div>
-    {% endfor %}
-  {% endif %}
+          {% endfor %}
+      {% endif %}
+  </section>
 </div>
+
     
 {% endif %}
 {% endblock %}

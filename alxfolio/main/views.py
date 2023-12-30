@@ -45,27 +45,24 @@ def portfolio(request, github_username):
         education = None
         socials = None
         try:
-            education = Education.objects.get(user_id=user_id)
-            socials = Social.objects.get(user_id=user_id)
+            education = Education.objects.filter(user_id=user_id).order_by('-created_at').first()
+            socials = Social.objects.filter(user_id=user_id).order_by('-created_at').first()
         except Education.DoesNotExist:
             education = None
         except Social.DoesNotExist:
             socials = None
-        bio = socials.bio or None
-        whatido = socials.whatido or None
-        title = socials.title or None
-        twitter = socials.twitter or None
-        instagram = socials.instagram or None
-        linkedin = socials.linkedin or None
-        social = [instagram, twitter, linkedin]
+
         return render(request, 'portfolio.html', {'user': user,
-                                                'data': data,
-                                                'repos': repos,
-                                                'education': education,
-                                                'bio': bio,
-                                                'whatido': whatido,
-                                                'title': title,
-                                                'socials': social})
+                                                  'data': data,
+                                                  'address': custom_user.address,
+                                                  'repos': repos,
+                                                  'education': education,
+                                                  'bio': socials.bio or None,
+                                                  'whatido': socials.whatido or None,
+                                                  'title': socials.title or None,
+                                                  'twitter': socials.twitter or None,
+                                                  'instagram': socials.instagram or None,
+                                                  'linkedin': socials.linkedin or None})
     except CustomUser.DoesNotExist:
             return render(request, '404.html')
 

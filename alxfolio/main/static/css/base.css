@@ -63,7 +63,7 @@ nav a:hover{
 }
 
 
-/* Header Elements */
+/* Body Elements */
 
 h1 {
     color: #fff;
@@ -93,6 +93,8 @@ p.heading {
     margin-left: 30px;
     font-size: 20px;
 }
+
+/* User List Styling */
 
 p.user-ls {
     margin-left: 30px;
@@ -134,3 +136,55 @@ p.user-ls {
 .a-user .e-user a:hover{
     color: rgb(128, 205, 243);
 }
+
+/* Portfolio */
+
+.user-port {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: aqua;
+}
+
+.img-port {
+    margin: auto;
+    width: 200px;
+    margin-top: 80px;
+    border-radius: 30px;
+}
+
+.p-name {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.profile-info,
+.activity-stats,
+.projects {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgb(4, 54, 97);
+}
+
+.what-i-do,
+.education,
+.contact-info,
+.address,
+.about-me {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+

@@ -25,13 +25,13 @@ class BaseModel(models.Model):
 
 
 class Education(BaseModel):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='education')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='education')
     school = models.CharField(max_length=100, null=True)
     year = models.CharField(max_length=100, null=True)
     degree = models.CharField(max_length=100, null=True)
 
 class Social(BaseModel):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='social')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='social')
     bio = models.CharField(max_length=500, null=True)
     title = models.CharField(max_length=100, null=True)
     whatido = models.CharField(max_length=500, null=True)
