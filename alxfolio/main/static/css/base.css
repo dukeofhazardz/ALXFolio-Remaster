@@ -86,10 +86,10 @@ h3 {
 p {
     color: #fff;
     font-style: inherit;
-    margin-top: 70px;
 }
 
 p.heading {
+    margin-top: 70px;
     margin-left: 30px;
     font-size: 20px;
 }
@@ -122,7 +122,7 @@ p.user-ls {
 .a-user .e-user img{
     height: 80px;
     width: 80px;
-    margin-bottom: 50px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
@@ -178,12 +178,29 @@ p.user-ls {
 
 .contact-info {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
+
+section a{
+    margin-left: 35px;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+}
+
+section a:hover {
+    color: aqua;
+}
+
+section p.address{
+    margin-top: 15px;
+}
+
+
+
 .what-i-do,
 .education,
-.address,
 .about-me {
     display: flex;
     flex-direction: column;

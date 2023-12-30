@@ -6,8 +6,14 @@
   <section class="profile-info">
     <img src="https://github.com/{{ data.login }}.png" class="img-port">
     <h3 class="p-name">{{ data.name }}</h3>
+    {% if title %}
+      <p class="title">{{ title }}</p>
+    {% endif %}
 
     <section class="contact-info">
+      {% if address %}
+        <p class="address">{{ address }}</p>
+      {% endif %}
       {% if twitter %}
         <a href="{{ twitter }}" target="_blank">Twitter</a>
       {% endif %}
@@ -18,13 +24,6 @@
         <a href="{{ instagram }}" target="_blank">Instagram</a>
       {% endif %}
     </section>
-
-    {% if address %}
-      <section class="address">
-        <h6>Address</h6>
-          <p>{{ address }}</p>
-      </section>
-    {% endif %}
 
       {% if bio %}
           <section class="about-me">
