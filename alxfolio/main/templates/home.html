@@ -6,16 +6,20 @@
 <h3>Your Personalized Portfolio <br>Generating Site</h3>
 
 <p class="heading">. . . create and customize your portfolio straight from github!</p>
+
+<p class="user-ls"> Below are some of our users</p>
 {% if users %}
   {% for a_user in users %}
     {% if a_user.github_username %}
-      <div class="a_user">
-        <p>
-          <img src="https://github.com/{{ a_user.github_username }}.png" class="img img-responsive" width="60px" height="60px">
-        </p>
-        <a href="{% url 'portfolio' github_username=a_user.github_username %}">
-          {{ a_user.first_name }} {{ a_user.last_name }}
-        </a>
+      <div class="a-user">
+        <div class="e-user">
+          <p>
+            <img src="https://github.com/{{ a_user.github_username }}.png" class="user-img">
+          </p>
+          <a href="{% url 'portfolio' github_username=a_user.github_username %}">
+            {{ a_user.first_name }} {{ a_user.last_name }}
+          </a>
+        </div>
       </div>
     {% endif %}
   {% endfor %}
