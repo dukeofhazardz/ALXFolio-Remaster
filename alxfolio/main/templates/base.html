@@ -23,6 +23,12 @@
         About
       </a>
       {% if user.is_authenticated %}
+        {% if request.path == '/'|add:user.github_username|add:'/' %}
+          <a href="{% url 'education' %}">Update Education </a>
+          <a href="{% url 'social' %}">Update Social</a>
+        {% endif %}
+      {% endif %}
+      {% if user.is_authenticated %}
         <a href="{% url 'portfolio' github_username=user.github_username%}">
           Portfolio
         </a>
