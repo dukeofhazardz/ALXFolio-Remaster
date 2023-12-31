@@ -25,66 +25,62 @@
       {% endif %}
     </section>
 
-      {% if bio %}
-          <section class="about-me">
-              <h6>About me</h6>
-              {% if user_title %}
-                  <p>{{ user_title }}</p>
-              {% endif %}
-              <p>{{ bio }}</p>
-          </section>
-      {% endif %}
+    {% if bio %}
+      <section class="about-me">
+        <h6>About me</h6>
+        <p>{{ bio }}</p>
+      </section>
+    {% endif %}
 
-      {% if whatido %}
-          <section class="what-i-do">
-              <h6>What I do</h6>
-              <p>{{ whatido }}</p>
-          </section>
-      {% endif %}
+    {% if whatido %}
+      <section class="what-i-do">
+        <h6>What I do</h6>
+        <p>{{ whatido }}</p>
+      </section>
+    {% endif %}
 
-      {% if education %}
-          <section class="education">
-              <h6>Education</h6>
-              <p>{{ education.school }}</p>
-              <p>{{ education.year }}</p>
-              <p>{{ education.degree }}</p><br>
-          </section>
-      {% endif %}
+    {% if education %}
+      <section class="education">
+        <h6>Education</h6>
+        <p>{{ education.school }}</p>
+        <p>{{ education.year }}</p>
+        <p>{{ education.degree }}</p><br>
+        </section>
+    {% endif %}
   </section>
 
   <section class="activity-stats">
-      <h3 class="mt-4 text-info">Activity Stats</h3>
-      <p>
-          <img src="https://github-readme-stats.vercel.app/api?username={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false&include_all_commits=true&count_private=true" /><br/>
-          <img src="https://github-readme-streak-stats.herokuapp.com/?user={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false" />
-      </p>
+    <h3 class="a-stats">Activity Stats</h3>
+      <div class="stats">
+        <img src="https://github-readme-stats.vercel.app/api?username={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false&include_all_commits=true&count_private=true" /><br/>
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user={{ data.login }}&theme=synthwave&show_icons=true&hide_border=false" />
+      </div>
   </section>
 
   <section class="projects">
-      <h3 class="mt-4 text-info"> Projects </h3>
+      <h3 class="git-pro"> Projects </h3>
       {% if repos %}
+        <div class="repos">
           {% for repo in repos %}
-              <div class="accordion accordion-flush" id="accordionFlushExample">
-                  <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{ repo.name }}" aria-expanded="true" aria-controls="{{ repo.name }}">
-                              <a class="text-decoration-none" href="{{ repo.url }}">{{ repo.name }} <i class="fa fa-external-link"></i></a>
-                          </button>
-                      </h2>
-                      {% if repo.description %}
-                          <div id="{{ repo.name }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                              <div class="accordion-body">
-                                  {{ repo.description }}
-                              </div>
-                          </div>
-                      {% endif %}
-                  </div>
+            <div class="repo-box">
+              <div class="r-name">
+                <a class="repo-name" href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a>
               </div>
+              {% if repo.description %}
+                <div class="r-des">
+                  <p class="repo-des">{{ repo.description }}</p>
+                </div>
+              {% else %}
+                <div class="r-des">
+                  <p class="repo-des">The {{ repo.name }} repository</p>
+                </div>
+              {% endif %}
+            </div>
           {% endfor %}
+        </div>
       {% endif %}
   </section>
 </div>
 
-    
 {% endif %}
 {% endblock %}
