@@ -280,3 +280,25 @@ section h6 {
     font-weight: 300;
     font-style: oblique;
 }
+
+/* About page*/
+
+.p-about {
+    text-align: center;
+    margin: 20px;
+    margin-top: 50px;
+}
+
+/* Not Found */
+
+.nf-div {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.nf-p {
+    font-weight: 500;
+}
