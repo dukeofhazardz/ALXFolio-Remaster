@@ -4,9 +4,9 @@ from .models import CustomUser, Education, Social
 
 
 class UserEducationForm(forms.ModelForm):
-    school = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    year = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    degree = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    school = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'School'}))
+    year = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Year'}))
+    degree = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Degree'}))
 
     class Meta:
         model = Education
@@ -14,12 +14,12 @@ class UserEducationForm(forms.ModelForm):
 
 
 class UserSocialForm(forms.ModelForm):
-    bio = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    whatido = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    twitter = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    linkedin = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    instagram = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    bio = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Bio'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Title'}))
+    whatido = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'What You Do'}))
+    twitter = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Twitter'}))
+    linkedin = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'LinkedIn'}))
+    instagram = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Instagram'}))
 
     class Meta:
         model = Social
@@ -27,14 +27,14 @@ class UserSocialForm(forms.ModelForm):
 
 
 class UserSignupForm(UserCreationForm):
-    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    github_username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    phone_no = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Last Name'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'Email'}))
+    github_username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Github Username'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder': 'Confirm Password'}))
+    phone_no = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Phone Number'}))
+    address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Address (State, Country)'}))
     
     class Meta:
         model = CustomUser

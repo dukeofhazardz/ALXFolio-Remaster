@@ -302,3 +302,25 @@ section h6 {
 .nf-p {
     font-weight: 500;
 }
+
+/* Forms */
+
+.form {
+    font-size: 50px;
+    margin-top: 110px;
+    margin-bottom: 50px;
+}
+
+.form-text {
+    color: white;
+}
+
+input[type="submit"].btn.btn-secondary {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+button.btn.btn-secondary {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

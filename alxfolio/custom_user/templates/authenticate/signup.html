@@ -1,14 +1,17 @@
 {% include 'base.html' %}
 
-<h1>Signup</h1>
+<h1 class="form">Signup</h1>
 {% block content %}
   <form method="POST" class="form-group">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <div class="mb-3">
+            {{ field }}
+        </div>
+    {% endfor %}
     <button type="submit" class="btn btn-secondary">Submit</button>
   </form>
 
 <a class="text-decoration-none" href="{% url 'login' %}">Already have an account? <b>Login</b><i class="fa fa-sign-in"></i></a>
-<a class="text-decoration-none" href="{% url 'home' %}">Go Home<i class="fa fa-home"></i></a>
-
+<br><br>
 {% endblock %}

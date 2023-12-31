@@ -1,12 +1,16 @@
 {% include 'base.html' %}
 {% block base %}
 
-<h1>Update Socials</h1>
+<h1 class="form">Update Socials</h1>
 
 <form method="POST" class="form-group">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <div class="mb-3">
+            {{ field }}
+        </div>
+    {% endfor %}
     <button type="submit" class="btn btn-secondary">Update</button>
     </form>
-
+    <br><br>
 {% endblock %}

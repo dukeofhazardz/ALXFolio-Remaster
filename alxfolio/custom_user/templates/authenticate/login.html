@@ -1,23 +1,20 @@
 {% include 'base.html' %}
 {% block content %}
 
-<h1>Login</h1>
+<h1 class="form">Login</h1>
 <form action="" method="post">
   {% csrf_token %}
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="text" class="form-control" name="email" aria-describedby="emailHelp">
+    <input type="text" class="form-control" name="email" placeholder="Email">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password">
+    <input type="password" class="form-control" name="password" placeholder="Password">
   </div>
   <input type="submit" value="Submit"
     class="btn btn-secondary">
 </form>
 
-<a class="text-decoration-none" href="{% url 'home' %}">Go Home<i class="fa fa-home"></i></a>
 <a class="text-decoration-none" href="{% url 'signup' %}">Don't have an account? <b>Signup</b><i class="fa fa-sign-up"></i></a>
 
 {% endblock %}
