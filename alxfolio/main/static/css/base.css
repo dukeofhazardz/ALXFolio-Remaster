@@ -324,3 +324,13 @@ button.btn.btn-secondary {
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
+.sl-text {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sl-text:hover {
+    color: aqua;
+}
